@@ -1,0 +1,40 @@
+﻿@model TaxViewModel
+
+@{
+    ViewData["Title"] = "Add Tax";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <h4>Submit Tax</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Year"></label>
+                <input asp-for="@Model.Year" class="form-control" />
+                <span asp-validation-for="@Model.Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.TotalIncome"></label>
+                <input asp-for="@Model.TotalIncome" class="form-control" />
+                <span asp-validation-for="@Model.TotalIncome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CharityPaidAmount"></label>
+                <input asp-for="@Model.CharityPaidAmount" class="form-control" />
+                <span asp-validation-for="@Model.CharityPaidAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.NumberOfChildren"></label>
+                <input asp-for="@Model.NumberOfChildren" class="form-control" />
+                <span asp-validation-for="@Model.NumberOfChildren" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tax.Core\Tax.Core.csproj" />
+    <ProjectReference Include="..\Tax.Data\Tax.Data.csproj" />
+    <ProjectReference Include="..\Tax.Repository\Tax.Repository.csproj" />
+    <ProjectReference Include="..\Tax.Tests.Common\Tax.Tests.Common.csproj" />
+    <ProjectReference Include="..\Tax.Web\Tax.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+  </ItemGroup>
+
+</Project>

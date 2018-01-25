@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Tax.Data.UserTax>
+@{
+    ViewData["Title"] = "Taxes";
+}
+<h2>List Taxes</h2>
+<a asp-controller="Tax" asp-action="AddTax">Create new Entry</a>
+<br />
+<br />
+<br />
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="@item.Year"></label>
+                <span></span>
+                <a href="/Tax/GetTax?year=@item.Year">@item.Year</a>
+
+                <label asp-for="@item.TaxDueAmount"></label>
+                <span style="color: green;">@item.TaxDueAmount</span>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
