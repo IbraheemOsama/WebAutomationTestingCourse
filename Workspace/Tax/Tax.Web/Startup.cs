@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -69,11 +68,6 @@ namespace Tax.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            //app.Run(async (context) => {
-            //    await context.Response.WriteAsync(
-            //       "Hello World! This ASP.NET Core Application");
-            //});
         }
     }
 }

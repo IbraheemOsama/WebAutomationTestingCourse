@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Tax.Tests.Common;
 using Microsoft.Extensions.DependencyInjection;
 using Tax.Data;
+using Tax.Web.Models.AccountViewModels;
 using Xunit;
 
 namespace Tax.Tests.IntegrationTests.Controllers
@@ -15,6 +15,9 @@ namespace Tax.Tests.IntegrationTests.Controllers
     public class AccountControllerTests : ServerFixture
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private const string Email = "ibraheem.osama@gmail.com";
+        private const string Password = "P@ssw0rd";
+
         public AccountControllerTests()
         {
             _userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>();
@@ -24,23 +27,57 @@ namespace Tax.Tests.IntegrationTests.Controllers
         public async Task Registration_CreateNewUser_UserCreated()
         {
             // Arrange
-            const string email = "ibraheem.osama@gmail.com";
-            const string password = "P@ssw0rd";
-            var formData = new Dictionary<string, string>
-                  {
-                    {"Email", email},
-                    {"Password", password},
-                    {"ConfirmPassword", password}
-                  };
+            var formData = new RegisterViewModel
+            {
+                Email = Email,
+                Password = Password,
+                ConfirmPassword = Password
+            }.ToDictionary();
 
             // Act
             HttpResponseMessage response = await PostAsync("/Account/Register", formData);
-            var user = _userManager.Users.FirstOrDefault(x => x.Email == email);
+            var user = GetCurrentUser();
 
             //Assert
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
             Assert.NotNull(user);
-            Assert.Equal(email, user.UserName);
+            Assert.Equal(Email, user.UserName);
+        }
+
+        [Fact]
+        public async Task Login_RegisteredUser_AbleToLogin()
+        {
+            // Arrange
+            var registerData = new RegisterViewModel
+            {
+                Email = Email,
+                Password = Password,
+                ConfirmPassword = Password
+            }.ToDictionary();
+
+            var loginData = new LoginViewModel
+            {
+                Email = Email,
+                Password = Password
+            }.ToDictionary();
+
+            // Act
+            await PostAsync("/Account/Register", registerData);
+            var response = await PostAsync("/Account/Login", loginData);
+
+            //Assert
+            Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        }
+
+        private ApplicationUser GetCurrentUser()
+        {
+            return _userManager.Users.FirstOrDefault(x => x.Email == Email);
+        }
+
+        public override void Dispose()
+        {
+            _userManager.DeleteAsync(GetCurrentUser()).Wait();
+            base.Dispose();
         }
     }
 }

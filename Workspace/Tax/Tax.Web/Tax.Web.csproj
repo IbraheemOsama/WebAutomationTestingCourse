@@ -1,42 +1,6 @@
-<!--<Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-Tax.Web-99FB4240-A1AE-46B0-8484-DD1B38EDE918</UserSecretsId>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-  </PropertyGroup>
-
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Tax.Core\Tax.Core.csproj" />
-    <ProjectReference Include="..\Tax.Data\Tax.Data.csproj" />
-    <ProjectReference Include="..\Tax.Repository\Tax.Repository.csproj" />
-  </ItemGroup>
-</Project>-->
-
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <UserSecretsId>aspnet-CHeReL.CheckApp-3befa0d6-35c2-42c7-af0a-e4645ba10196</UserSecretsId>
-    <Company>CHeReL</Company>
-    <Authors>CHeReL, Readify</Authors>
-    <Product>CheckApp</Product>
-    <Description>Helps researchers track their data linkage applications.</Description>
-    <Version>1.1.2222-beta1</Version>
+    <UserSecretsId>aspnet-Tax.Web-99FB4240-A1AE-46B0-8484-DD1B38EDE918</UserSecretsId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup>
@@ -46,15 +10,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Validators\**" />
-    <Content Remove="Validators\**" />
-    <EmbeddedResource Remove="Validators\**" />
-    <None Remove="Validators\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="tsconfig.json" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.4.1" />
@@ -71,19 +26,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Service\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Tax.Core\Tax.Core.csproj" />
     <ProjectReference Include="..\Tax.Data\Tax.Data.csproj" />
     <ProjectReference Include="..\Tax.Repository\Tax.Repository.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\favicon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 </Project>
