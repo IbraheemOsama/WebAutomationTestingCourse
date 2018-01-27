@@ -6,24 +6,33 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.TestHost;
-using Tax.Web.Controllers;
+using Microsoft.Extensions.DependencyInjection;
+using Tax.Data;
+using Tax.Repository;
+using Tax.Tests.Common;
 using Tax.Web.Models.AccountViewModels;
 
-namespace Tax.Tests.Common
+namespace Tax.Tests.IntegrationTests
 {
     public class ServerFixture : IDisposable
     {
         private const string BaseAddress = "http://localhost:5310";
         private const string RequestVerificationToken = "__RequestVerificationToken";
         private readonly TestServer _server;
+
+        protected const string Email = "ibraheem.osama@gmail.com";
+        protected const string Password = "P@ssw0rd";
         protected HttpClient Client { get; }
         protected IServiceProvider ServiceProvider { get; }
+        protected UserManager<ApplicationUser> UserManager { get; }
+        protected IUserTaxRepository UserTaxRepository { get; }
+        protected ApplicationUser User => UserManager.Users.FirstOrDefault(x => x.Email == Email);
 
         public ServerFixture()
         {
             const string environemnt = "Development";
-
             var rootLocation =
                 $@"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent?.Parent?.Parent?.FullName}\Tax.Web";
 
@@ -37,6 +46,10 @@ namespace Tax.Tests.Common
 
             Client.BaseAddress = new Uri(BaseAddress);
             ServiceProvider = _server.Host.Services;
+
+
+            UserManager = ServiceProvider.GetService<UserManager<ApplicationUser>>();
+            UserTaxRepository = ServiceProvider.GetService<IUserTaxRepository>();
         }
 
         protected async Task<HttpResponseMessage> PostAsync(string url, Dictionary<string, string> formData, string email = null, string password = null)

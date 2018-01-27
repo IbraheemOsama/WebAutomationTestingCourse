@@ -95,11 +95,11 @@ namespace Tax.Web.Controllers
                 await _userTaxRepository.AddUserTax(new UserTax
                 {
                     UserId = user.Id,
-                    CharityPaidAmount = input.CharityPaidAmount,
-                    TotalIncome = input.TotalIncome,
-                    NumberOfChildren = input.NumberOfChildren,
-                    Year = input.Year,
-                    TaxDueAmount = _taxService.CalculateTax(input.Year, input.NumberOfChildren, input.CharityPaidAmount, input.TotalIncome)
+                    CharityPaidAmount = input.CharityPaidAmount.Value,
+                    TotalIncome = input.TotalIncome.Value,
+                    NumberOfChildren = input.NumberOfChildren.Value,
+                    Year = input.Year.Value,
+                    TaxDueAmount = _taxService.CalculateTax(input.Year.Value, input.NumberOfChildren.Value, input.CharityPaidAmount.Value, input.TotalIncome.Value)
                 });
 
                 _logger.LogInformation("New Tax Created");
