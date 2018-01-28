@@ -86,6 +86,12 @@ namespace Tax.Tests.IntegrationTests.Controllers
             Assert.Contains("The field Tax Year must be between 2000 and 2020.", responseContent);
         }
 
+        [Fact(Skip = "To be done by you, remove Skip property in the Fact attribute to be able to run this method and see it in text explorer")]
+        public async Task GetTax_WhenInsertValidData_DataRetrieved()
+        {
+            // TODO as Home work ;)
+        }
+        
         public override void Dispose()
         {
             var context = ServiceProvider.GetService<TaxDbContext>();

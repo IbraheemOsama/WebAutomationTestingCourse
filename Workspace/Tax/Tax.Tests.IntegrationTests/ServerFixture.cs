@@ -114,8 +114,8 @@ namespace Tax.Tests.IntegrationTests
 
         public virtual void Dispose()
         {
-            Client?.Dispose();
-            _server?.Dispose();
+            Client.Dispose();
+            _server.Dispose();
         }
     }
 }
