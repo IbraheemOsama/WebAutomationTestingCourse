@@ -15,7 +15,7 @@ namespace Tax.Core
 
         public decimal GetYearPercentage(int year)
         {
-            return (decimal)(YearPercentage.ContainsKey(year) ? YearPercentage[year] : 6.0);
+            return (decimal)(YearPercentage.ContainsKey(year) ? YearPercentage[year] : 6.0/100);
         }
     }
 }

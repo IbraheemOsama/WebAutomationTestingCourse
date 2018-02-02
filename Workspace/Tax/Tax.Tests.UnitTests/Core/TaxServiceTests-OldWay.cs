@@ -29,6 +29,7 @@ namespace Tax.Tests.UnitTests.Core
                 {
                     return 10;
                 }
+                
                 return 5;
             }
         }
@@ -38,14 +39,14 @@ namespace Tax.Tests.UnitTests.Core
         {
             // Arrange
             const int year = 2000;
-            var mock = new Mock();
+            var uut = new Mock();
 
             // Act
-            var uut = new TaxService(mock);
-            uut.CalculateTax(year, 3, 10, 1000);
+            var taxService = new TaxService(uut);
+            taxService.CalculateTax(year, 3, 10, 1000);
 
             //Assert
-            Assert.True(mock.IsCalled);
+            Assert.True(uut.IsCalled);
         }
 
         class Mock : IYearService

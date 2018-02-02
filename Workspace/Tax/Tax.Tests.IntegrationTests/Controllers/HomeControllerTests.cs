@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using Tax.Tests.Common;
 using Xunit;
 
 namespace Tax.Tests.IntegrationTests.Controllers

@@ -19,13 +19,16 @@ namespace Tax.Tests.UnitTests.Controllers
         {
             // why all these nulls !!
             var userManagerStub = Substitute.For<UserManager<ApplicationUser>>(Substitute.For<IUserStore<ApplicationUser>>(), null, null, null, null, null, null, null, null);
-
             var logger = Substitute.For<ILogger<TaxController>>();
             var userTaxRepo = Substitute.For<IUserTaxRepository>();
             var taxService = Substitute.For<ITaxService>();
+
             var taxController = new TaxController(userManagerStub, logger, userTaxRepo, taxService);
+
             taxController.ModelState.AddModelError("error", "error");
+
             var result = await taxController.AddTax(new TaxViewModel());
+
             Assert.False(taxController.ModelState.IsValid);
             Assert.IsType<ViewResult>(result);
             Assert.IsNotType<LocalRedirectResult>(result);

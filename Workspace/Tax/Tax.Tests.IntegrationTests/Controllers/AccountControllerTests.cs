@@ -54,11 +54,5 @@ namespace Tax.Tests.IntegrationTests.Controllers
             //Assert
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
         }
-
-        public override void Dispose()
-        {
-            UserManager.DeleteAsync(User).Wait();
-            base.Dispose();
-        }
     }
 }

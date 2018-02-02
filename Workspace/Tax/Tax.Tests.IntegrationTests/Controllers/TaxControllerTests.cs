@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Tax.Tests.Common;
-using Microsoft.Extensions.DependencyInjection;
 using Tax.Data;
 using Tax.Web.Models;
 using Xunit;
@@ -90,15 +88,6 @@ namespace Tax.Tests.IntegrationTests.Controllers
         public async Task GetTax_WhenInsertValidData_DataRetrieved()
         {
             // TODO as Home work ;)
-        }
-        
-        public override void Dispose()
-        {
-            var context = ServiceProvider.GetService<TaxDbContext>();
-            // should be replaced with truncate script for performance.
-            context.UserTaxes.RemoveRange(context.UserTaxes.ToArray());
-            UserManager.DeleteAsync(User).Wait();
-            base.Dispose();
         }
     }
 }
