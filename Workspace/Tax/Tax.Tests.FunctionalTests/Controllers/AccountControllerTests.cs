@@ -22,9 +22,8 @@ namespace Tax.Tests.FunctionalTests.Controllers
             var loginPage = Driver.NavigateToLoginPage();
             loginPage.EmailTextBox = Email;
             loginPage.PasswordTextBox = Password;
-            loginPage.ClickLogin();
 
-            var homePage = Driver.GetHomePage();
+            var homePage = loginPage.ClickLogin();
             var result = homePage.CurrentLoggedInUserText;
 
              Assert.Equal($"Hello {Email}!", result);
@@ -39,7 +38,7 @@ namespace Tax.Tests.FunctionalTests.Controllers
         public override void Dispose()
         {
             // we can use different approach which is creating random different users then on all tests tearDown we delete the database or leave the framework to remove it.
-            UserManager.DeleteAsync(User).Wait();
+            //UserManager.DeleteAsync(User).Wait();
             base.Dispose();
         }
     }
