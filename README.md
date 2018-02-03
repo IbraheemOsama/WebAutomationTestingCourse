@@ -1,1 +1,1 @@
-This repository will be for my next Automation testing course
+This repository will be for my Automation testing course on YouTube
