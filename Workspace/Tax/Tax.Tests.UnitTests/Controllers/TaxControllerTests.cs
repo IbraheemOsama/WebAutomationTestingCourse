@@ -29,7 +29,8 @@ namespace Tax.Tests.UnitTests.Controllers
 
             var result = await taxController.AddTax(new TaxViewModel());
 
-            Assert.False(taxController.ModelState.IsValid);
+            Assert.True(false);
+            Assert.True(taxController.ModelState.IsValid);
             Assert.IsType<ViewResult>(result);
             Assert.IsNotType<LocalRedirectResult>(result);
         }
