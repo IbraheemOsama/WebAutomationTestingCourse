@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -39,6 +40,16 @@ namespace Tax.Tests.UnitTests.Controllers
         public async Task GetTax_ValidData_ReturnsViewResults()
         {
             // TODO try to stub all dependencies inside GetTax Action inside Tax Controller :)
+            var userManger = Substitute.For<UserManager<ApplicationUser>>(Substitute.For<IUserStore<ApplicationUser>>(), null, null, null, null, null, null, null, null);
+            var logger = Substitute.For<ILogger<TaxController>>();
+            var userTaxRepo = Substitute.For<IUserTaxRepository>();
+            var taxService = Substitute.For<ITaxService>();
+            var taxController = new TaxController(userManger, logger, userTaxRepo, taxService);
+            var result = Assert.ThrowsAsync<ApplicationException>(() => taxController.GetTax(null));
+
+            Assert.Equal("Year must be provided", result.Result.Message);
+            Assert.IsNotType<LocalRedirectResult>(result);
+            Assert.IsNotType<ViewResult>(result);
         }
     }
 }
