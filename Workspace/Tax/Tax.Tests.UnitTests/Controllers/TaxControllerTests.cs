@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -35,10 +37,46 @@ namespace Tax.Tests.UnitTests.Controllers
             Assert.IsNotType<LocalRedirectResult>(result);
         }
 
-        [Fact(Skip = "To be done by you, remove Skip property in the Fact attribute to be able to run this method and see it in text explorer")]
+        [Fact]
         public async Task GetTax_ValidData_ReturnsViewResults()
         {
             // TODO try to stub all dependencies inside GetTax Action inside Tax Controller :)
+            var userManagerStub = Substitute.For<UserManager<ApplicationUser>>(Substitute.For<IUserStore<ApplicationUser>>(), null, null, null, null, null, null, null, null);
+            var logger = Substitute.For<ILogger<TaxController>>();
+            var userTaxRepo = Substitute.For<IUserTaxRepository>();
+            var taxService = Substitute.For<ITaxService>();
+            var taxController = new TaxController(userManagerStub, logger, userTaxRepo, taxService);
+            var claimsPrincipal = Substitute.For<ClaimsPrincipal>();
+            ApplicationUser user = new ApplicationUser
+            {
+                UserName = "test@test.it",
+                Id = Guid.NewGuid().ToString(),
+                Email = "test@test.it"
+            };
+            _ = userManagerStub.GetUserAsync(claimsPrincipal).Returns(user);
+            const int year = 2000;
+            var userTax = new UserTax
+            {
+                CharityPaidAmount = 10,
+                NumberOfChildren = 0,
+                TaxDueAmount = 10,
+                TotalIncome = 3000,
+                Year = 2020
+            };
+            _ = userTaxRepo.GetUserTax(user.Id, year).Returns(userTax);
+
+            //var taxViewResult = new TaxViewModel
+            //{
+            //    CharityPaidAmount = userTax.CharityPaidAmount,
+            //    NumberOfChildren = userTax.NumberOfChildren,
+            //    TotalIncome = userTax.TotalIncome,
+            //    Year = userTax.Year,
+            //    TaxDueAmount = userTax.TaxDueAmount
+            //};
+
+            //I think we don't need to use taxViewResult and i want to know diff btn .Received() and .Returns()
+            var result = await taxController.GetTax(year).Received();
+            Assert.IsType<ViewResult>(result);
         }
     }
 }
