@@ -61,7 +61,7 @@ namespace Tax.Tests.UnitTests.Controllers
                 NumberOfChildren = 0,
                 TaxDueAmount = 10,
                 TotalIncome = 3000,
-                Year = 2020
+                Year = 2000
             };
             _ = userTaxRepo.GetUserTax(user.Id, year).Returns(userTax);
 
@@ -75,7 +75,7 @@ namespace Tax.Tests.UnitTests.Controllers
             //};
 
             //I think we don't need to use taxViewResult and i want to know diff btn .Received() and .Returns()
-            var result = await taxController.GetTax(year).Received();
+            var result = await taxController.GetTax(year);
             Assert.IsType<ViewResult>(result);
         }
     }
