@@ -35,7 +35,7 @@ namespace Tax.Tests.UnitTests.Controllers
             Assert.IsNotType<LocalRedirectResult>(result);
         }
 
-        [Fact(Skip = "To be done by you, remove Skip property in the Fact attribute to be able to run this method and see it in text explorer")]
+        [Fact(Skip = "To be done by you, remove Skip property in the Fact attribute to be able to run this method and see it in text explorer.")]
         public async Task GetTax_ValidData_ReturnsViewResults()
         {
             // TODO try to stub all dependencies inside GetTax Action inside Tax Controller :)
